@@ -1,0 +1,302 @@
+/* Home */
+
+.body {
+    /* background-image: url("images/back.jpg"); */
+    background-image: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url("../pictures/back.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100vh;
+}
+
+.store-name {
+    margin-top: 18%;
+    margin-left: 28%;
+    position: absolute;
+    /* position: relative;
+    top : 40%;
+    left:40%; */
+    color: white;
+    font-family: 'PT Serif', serif;
+}
+
+.order-btn1 {
+    margin: 30% 0 0 30%;
+}
+
+.order-btn2 {
+    margin: 30% 0 0 10%;
+}
+
+.nav-item {
+    font-weight: bolder;
+    color: aliceblue;
+}
+
+.headding1 {
+    text-align: center;
+    margin-top: 2%;
+    padding-top: 2%;
+}
+
+.overview {
+    font-family: 'EB Garamond', serif;
+    font-size: 130%;
+    margin-left: 20%;
+    margin-top: 5%;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8%;
+}
+
+.delivery {
+    width: 60%;
+    margin: 5% 0 0 35%;
+}
+
+.bot-btn1 {
+    margin-left: 35%;
+    margin-top: 5%;
+}
+
+.bot-btn2 {
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+.bod2 {
+    background-color: #ffffff;
+    background-image: url("https://www.transparenttextures.com/patterns/fabric-of-squares.png");
+}
+
+.cont {
+    background-color: white;
+}
+
+
+/* Product Page */
+
+.ProductHeading {
+    margin-top: 5%;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.productButton {
+    text-align: center;
+    border-style: groove;
+    background-color: rgb(229, 229, 229);
+    font-family: 'Merriweather', serif;
+    font-weight: bold;
+}
+
+.productButton p {
+    margin-bottom: 0;
+    padding: 2% 2%;
+}
+
+.copyright {
+    text-align: center;
+    margin: 2% 0;
+}
+
+.ProductsItems div {
+    margin-bottom: 2%;
+}
+
+.remove {
+    display: none;
+}
+
+
+/* login */
+
+.login__field {
+    padding: 20px 0px;
+    position: relative;
+}
+
+.login__input:active,
+.login__input:focus,
+.login__input:hover {
+    outline: none;
+    border-bottom-color: #6A679E;
+    border-bottom-color: #000000;
+}
+
+.login__input {
+    border: none;
+    border-bottom: 2px solid #910000;
+    border-bottom: 2px solid #af0000;
+    background: none;
+    padding: 10px;
+    padding-left: 24px;
+    font-weight: 700;
+    width: 70%;
+    transition: .2s;
+    text-align: center;
+}
+
+.login__inputVote {
+    border: none;
+    border-bottom: 2px solid #910000;
+    border-bottom: 2px solid #af0000;
+    background: none;
+    padding: 10px;
+    padding-left: 24px;
+    font-weight: 700;
+    width: 70%;
+    transition: .2s;
+    text-align: center;
+}
+
+.ProfileUpdateHead {
+    margin: 2% 35%;
+    text-align: center;
+    color: aliceblue;
+}
+
+.loginBG {
+    background-color: #ffffff;
+    background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");
+}
+
+.loginbtn {
+    padding: 2% 15%;
+}
+
+.AllHeading {
+    padding-top: 20%;
+}
+
+.modalBtn {
+    margin: auto;
+}
+
+.QuaHead {
+    font-family: 'Arvo';
+}
+
+
+/* contact body */
+
+.contact-bod {
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../pictures/contact.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 90vh;
+    background-position-y: 40%;
+}
+
+.con {
+    padding-top: 7%;
+    padding-left: 6%;
+}
+
+.con .content .right-side {
+    width: 75%;
+    margin-left: 75px;
+}
+
+.content .right-side .topic-text {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.right-side .input-box {
+    height: 50px;
+    width: 100%;
+    margin: 12px 0;
+}
+
+.right-side .input-box input,
+.right-side .input-box textarea {
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background: #efefeb;
+    border-radius: 6px;
+    padding: 0 15px;
+    resize: none;
+}
+
+.right-side .message-box {
+    min-height: 110px;
+}
+
+.right-side .input-box textarea {
+    padding-top: 6px;
+}
+
+.right-side .button {
+    display: inline-block;
+    margin-top: 12px;
+}
+
+.right-side .button input[type="button"] {
+    color: #fff;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: #3e2093;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button input[type="button"]:hover {
+    background: #5029bc;
+}
+
+@media (max-width: 950px) {
+    .con {
+        width: 90%;
+        padding: 30px 40px 40px 35px;
+    }
+    .con .content .right-side {
+        width: 75%;
+        margin-left: 55px;
+    }
+}
+
+@media (max-width: 820px) {
+    .con {
+        margin: 40px 0;
+        height: 100%;
+    }
+    .con .content {
+        flex-direction: column-reverse;
+    }
+    .con .content .right-side {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+.input-box {
+    opacity: 60%;
+}
+
+.map {
+    margin-left: 9%;
+    margin-top: 1%;
+    height: 500px;
+    width: 100%;
+    position: relative;
+}
+
+.contact-head {
+    margin-top: 5%;
+    position: relative;
+    font-family: 'EB Garamond', serif;
+}
