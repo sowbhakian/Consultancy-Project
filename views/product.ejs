@@ -25,10 +25,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer"
     />
     <script src="https://kit.fontawesome.com/8bbe7ed51b.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #ffffff;
+            background-image: url("https://www.transparenttextures.com/patterns/beige-paper.png");
+        }
+    </style>
 </head>
 
 <body>
 
+    <!-- Nav -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgba(0, 0, 0, 0.644);">
         <a class="navbar-brand text-light" href="#" style="font-family: 'Spartan', sans-serif;">MARIAMMAL FOOD PRODUCTS </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,188 +56,307 @@
                     <a class="nav-link mr-3 ml-2 text-light" href="/contact">CONTACT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-3 ml-2 text-light" style="font-size: 120%;" href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a class="nav-link mr-3 ml-2 text-light" style="font-size: 120%;" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
                 </li>
+
             </ul>
+
+            <%if(username.length!=0){%>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <i class="fa-solid fa-user text-warning">  <%=username%></i>                        
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/logout">Log Out</a>
+                    </div>
+                </div>
+                <%}%>
         </div>
     </nav>
+
 
     <!-- Products List Name -->
     <section>
         <div class="container-fluid">
             <h2 class="ProductHeading">Products Available</h2>
             <div class="row pb-5">
-                <div class="col-lg-2 productButton" onclick="productDiplay('1')">
-                    <p>Dairy Products</p>
+                <div class="col-lg-2 productButton selectedItem" id="productHead1" onclick="productDiplay('1')">
+                    <p>DAIRY</p>
                 </div>
-                <div class="col-lg-2 productButton" onclick="productDiplay('2')">
-                    <p>Cheeze Products</p>
+                <div class="col-lg-2 productButton" id="productHead2" onclick="productDiplay('2')">
+                    <p>CULLINARY</p>
                 </div>
-                <div class="col-lg-2 productButton" onclick="productDiplay('3')">
-                    <p>Frozen Snacks (Veg)</p>
+                <div class="col-lg-2 productButton" id="productHead3" onclick="productDiplay('3')">
+                    <p>FILLING</p>
                 </div>
-                <div class="col-lg-2 productButton" onclick="productDiplay('4')">
-                    <p>Frozen Snacks (Non-Veg)</p>
+                <div class="col-lg-2 productButton" id="productHead4" onclick="productDiplay('4')">
+                    <p>FROZEN (Non-Veg)</p>
                 </div>
-                <div class="col-lg-2 productButton" onclick="productDiplay('5')">
-                    <p>Italian Foods</p>
+                <div class="col-lg-2 productButton" id="productHead5" onclick="productDiplay('5')">
+                    <p>FROZEN (Veg)</p>
                 </div>
-                <div class="col-lg-2 productButton" onclick="productDiplay('6')">
-                    <p>Tinned Products</p>
+                <div class="col-lg-2 productButton" id="productHead6" onclick="productDiplay('6')">
+                    <p>TINNED</p>
                 </div>
 
             </div>
 
         </div>
     </section>
-    1
-    <!-- Products1 -->
+
+
+    <!-- Products1  Dairy-->
     <section id="p1">
         <div class="row container-fluid ProductsItems">
-            <div class="col-lg-3">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="public/images/1.png" alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-lg-6">
-                            <i class="fa-solid fa-plus"></i>
+            <%for(var i=1; i <=5 ;){%>
+                <div class="col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="pictures/DAIRY<%=i%>.png" alt="Card image cap">
+                        <div class="text-center text-info">
+                            <h2>
+                                <%=products[0].DAIRY[i-1].ProductName%>
+                            </h2>
+
                         </div>
-                        <div class="col-lg-6">
-                            <i class="fa-solid fa-minus"></i>
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h5 class="card-text">Quantity : </h5>
+                            <form action="/cart" method="post">
+                                <div class="text-center">
+                                    <i class="cursor fas fa-solid fa-minus fs-5" onclick="decrement('demoInput1<%=i%>')"></i>
+                                    <input id="demoInput1<%=i%>" value="1" class="text-center" style="border-top:1px;border-left: 1px;border-right: 1px;" type=number name="quantity" min=1 max=10 value="1">
+                                    <i class="cursor fas fa-solid fa-plus fs-5" onclick="increment('demoInput1<%=i%>')"></i>
+                                </div>
+                                <h4 class="text-center">Price :
+                                    <%=products[0].DAIRY[i-1].Price%>
+                                </h4>
+                                <div class="text-center">
+                                    <input type="hidden" name="image" value="pictures/DAIRY<%=i%>.png">
+                                    <input type="hidden" name="product" value="<%=products[0].DAIRY[i-1].ProductName%>">
+                                    <input type="hidden" name="price" value="<%=products[0].DAIRY[i-1].Price%>">
+                                    <input type="hidden" name="userid" value="<%=username%>">
+                                    <button class="btn btn-outline-info" type="submit">ADD TO CART</button>
+                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
+                <%i++%>
+                    <%}%>
         </div>
     </section>
-    2
-    <!-- Products2 -->
+
+    <!-- Products2 CULLINARY-->
     <section id="p2" class="remove">
         <div class="row container-fluid ProductsItems">
-            <div class="col-lg-3">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="public/images/1.png" alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-lg-6">
-                            <i class="fa-solid fa-plus"></i>
+            <%for(var i=1; i <=3 ;){%>
+                <div class="col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="pictures/CULLINARY<%=i%>.png" alt="Card image cap">
+                        <div class="text-center text-info">
+                            <h2>
+                                <%=products[5].CULLINARY[i-1].ProductName%>
+                            </h2>
+
                         </div>
-                        <div class="col-lg-6">
-                            <i class="fa-solid fa-minus"></i>
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h5 class="card-text">Quantity : </h5>
+                            <form action="/cart" method="post">
+                                <div class="text-center">
+                                    <i class="cursor fas fa-solid fa-minus fs-5" onclick="decrement('demoInput2<%= i %>')"></i>
+                                    <input id="demoInput2<%=i%>" class="text-center" style="border-top:1px;border-left: 1px;border-right: 1px;" type=number name="quantity" min=1 max=10 value="1">
+                                    <i class="cursor fas fa-solid fa-plus fs-5" onclick="increment('demoInput2<%= i %>')"></i>
+                                </div>
+                                <h4 class="text-center">Price :
+                                    <%=products[5].CULLINARY[i-1].Price%>
+                                </h4>
+                                <div class="text-center">
+                                    <input type="hidden" name="image" value="pictures/CULLINARY<%=i%>.png">
+                                    <input type="hidden" name="product" value="<%=products[5].CULLINARY[i-1].ProductName%>">
+                                    <input type="hidden" name="price" value="<%=products[5].CULLINARY[i-1].Price%>">
+                                    <input type="hidden" name="userid" value="<%=username%>">
+                                    <button class="btn btn-outline-info" type="submit">ADD TO CART</button>
+                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
+                <%i++%>
+                    <%}%>
         </div>
     </section>
-    3
-    <!-- Products3 -->
+
+
+    <!-- Products3 FILLING-->
     <section id="p3" class="remove">
         <div class="row container-fluid ProductsItems">
-            <div class="col-lg-3">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="public/images/1.png" alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-lg-6">
-                            <i class="fa-solid fa-plus"></i>
+            <%for(var i=1; i <=3 ;){%>
+                <div class="col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="pictures/FILLING<%=i%>.png" alt="Card image cap">
+                        <div class="text-center text-info">
+                            <h2>
+                                <%=products[1].FILLING[i-1].ProductName%>
+                            </h2>
+
                         </div>
-                        <div class="col-lg-6">
-                            <i class="fa-solid fa-minus"></i>
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h5 class="card-text">Quantity : </h5>
+                            <form action="/cart" method="post">
+                                <div class="text-center">
+                                    <i class="cursor fas fa-solid fa-minus fs-5" onclick="decrement('demoInput3<%= i %>')"></i>
+                                    <input id="demoInput3<%= i %>" class="text-center" style="border-top:1px;border-left: 1px;border-right: 1px;" type=number name="quantity" min=1 max=10 value="1">
+                                    <i class="cursor fas fa-solid fa-plus fs-5" onclick="increment('demoInput3<%= i %>')"></i>
+                                </div>
+                                <h4 class="text-center">Price :
+                                    <%=products[1].FILLING[i-1].Price%>
+                                </h4>
+                                <div class="text-center">
+                                    <input type="hidden" name="image" value="pictures/FILLING<%=i%>.png">
+                                    <input type="hidden" name="product" value="<%=products[1].FILLING[i-1].ProductName%>">
+                                    <input type="hidden" name="price" value="<%=products[1].FILLING[i-1].Price%>">
+                                    <input type="hidden" name="userid" value="<%=username%>">
+                                    <button class="btn btn-outline-info" type="submit">ADD TO CART</button>
+                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
+                <%i++}%>
         </div>
     </section>
-    4
-    <!-- Products4 -->
+
+    <!-- Products4 FROZENNONVEG-->
     <section id="p4" class="remove">
         <div class="row container-fluid ProductsItems">
-            <div class="col-lg-3">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="public/images/1.png" alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-lg-6">
-                            <i class="fa-solid fa-plus"></i>
+            <%for(var i=1; i <=5 ;){%>
+                <div class="col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="pictures/FROZENNONVEG<%=i%>.png" alt="Card image cap">
+                        <div class="text-center text-info">
+                            <h2>
+                                <%=products[2].FROZENNV[i-1].ProductName%>
+                            </h2>
+
                         </div>
-                        <div class="col-lg-6">
-                            <i class="fa-solid fa-minus"></i>
+                        <div class="card-body">
+                            <h4></h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h5 class="card-text">Quantity : </h5>
+                            <form action="/cart" method="post">
+                                <div class="text-center">
+                                    <i class="cursor fas fa-solid fa-minus fs-5" onclick="decrement('demoInput4<%= i %>')"></i>
+                                    <input id="demoInput4<%= i %>" class="text-center" style="border-top:1px;border-left: 1px;border-right: 1px;" type=number name="quantity" min=1 max=10 value="1">
+                                    <i class="cursor fas fa-solid fa-plus fs-5" onclick="increment('demoInput4<%= i %>')"></i>
+                                </div>
+                                <h4 class="text-center">Price :
+                                    <%=products[2].FROZENNV[i-1].Price%>
+                                </h4>
+                                <div class="text-center">
+                                    <input type="hidden" name="image" value="pictures/FROZENNONVEG<%=i%>.png">
+                                    <input type="hidden" name="product" value="<%= products[2].FROZENNV[i-1].ProductName%>">
+                                    <input type="hidden" name="price" value="<%=products[2].FROZENNV[i-1].Price%>">
+                                    <input type="hidden" name="userid" value="<%=username%>">
+                                    <button class="btn btn-outline-info" type="submit">ADD TO CART</button>
+                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
+                <%i++}%>
         </div>
     </section>
-    5
-    <!-- Products5 -->
+
+
+
+    <!-- Products5 FROZZENVEG-->
     <section id="p5" class="remove">
         <div class="row container-fluid ProductsItems">
-            <div class="col-lg-3">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="public/images/1.png" alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-lg-6">
-                            <i class="fa-solid fa-plus"></i>
+            <%for(var i=1; i <=5 ;){%>
+                <div class="col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="pictures/FROZZEN VEG<%=i%>.png" alt="Card image cap">
+                        <div class="text-center text-info">
+                            <h2>
+                                <%=products[3].FROZENV[i-1].ProductName%>
+                            </h2>
+
                         </div>
-                        <div class="col-lg-6">
-                            <i class="fa-solid fa-minus"></i>
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h5 class="card-text">Quantity : </h5>
+                            <form action="/cart" method="post">
+                                <div class="text-center">
+                                    <i class="cursor fas fa-solid fa-minus fs-5" onclick="decrement('demoInput5<%= i %>')"></i>
+                                    <input id="demoInput5<%= i %>" class="text-center" style="border-top:1px;border-left: 1px;border-right: 1px;" type=number name="quantity" min=1 max=10 value="1">
+                                    <i class="cursor fas fa-solid fa-plus fs-5" onclick="increment('demoInput5<%= i %>')"></i>
+                                </div>
+                                <h4 class="text-center">Price :
+                                    <%=products[3].FROZENV[i-1].Price%>
+                                </h4>
+
+                                <div class="text-center">
+                                    <input type="hidden" name="image" value="pictures/FROZZEN VEG<%=i%>.png">
+                                    <input type="hidden" name="product" value="<%= products[3].FROZENV[i-1].ProductName %>">
+                                    <input type="hidden" name="price" value="<%=products[3].FROZENV[i-1].Price%>">
+                                    <input type="hidden" name="userid" value="<%=username%>">
+                                    <button class="btn btn-outline-info" type="submit">ADD TO CART</button>
+                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
+                <%i++}%>
         </div>
     </section>
-    6
-    <!-- Products6 -->
+
+
+    <!-- Products6 TINNED-->
     <section id="p6" class="remove">
         <div class="row container-fluid ProductsItems">
-            <div class="col-lg-3">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="public/images/1.png" alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-lg-6">
-                            <i class="fa-solid fa-plus"></i>
+            <%for(var i=1; i <=5 ;){%>
+                <div class="col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="pictures/TINNED<%=i%>.png" alt="Card image cap">
+                        <div class="text-center text-info">
+                            <h2>
+                                <%=products[4].TINNED[i-1].ProductName%>
+                            </h2>
+
                         </div>
-                        <div class="col-lg-6">
-                            <i class="fa-solid fa-minus"></i>
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h5 class="card-text">Quantity : </h5>
+                            <form action="/cart" method="post">
+                                <div class="text-center">
+                                    <i class="cursor fas fa-solid fa-minus fs-5" onclick="decrement('demoInput6<%= i %>')"></i>
+                                    <input id="demoInput6<%= i %>" class="text-center" style="border-top:1px;border-left: 1px;border-right: 1px;" type=number name="quantity" min=1 max=10 value="1">
+                                    <i class="cursor fas fa-solid fa-plus fs-5" onclick="increment('demoInput6<%= i %>')"></i>
+                                </div>
+                                <h4 class="text-center">Price :
+                                    <%=products[4].TINNED[i-1].Price%>
+                                </h4>
+                                <div class="text-center">
+                                    <input type="hidden" name="image" value="pictures/TINNED<%=i%>.png">
+                                    <input type="hidden" name="product" value="<%= products[4].TINNED[i-1].ProductName %>">
+                                    <input type="hidden" name="price" value="<%=products[4].TINNED[i-1].Price%>">
+                                    <input type="hidden" name="userid" value="<%=username%>">
+                                    <button class="btn btn-outline-info" type="submit">ADD TO CART</button>
+                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
+                <%i++}%>
         </div>
     </section>
 
 
     <section>
-        <div class="copyright">
-            <p>MF</p>
-        </div>
+        <p class="text-center mt-4"><i class="fa-solid fa-copyright"></i> Mariammal Food Products</p>
     </section>
-
-
-
 
     <!-- jQuery -->
     <script src='https://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
@@ -242,11 +368,23 @@
                 if (i == productName) {
                     console.log('p' + i)
                     $('#p' + i).removeClass('remove');
+                    $('#productHead' + i).addClass('selectedItem');
                 } else {
                     console.log('p' + i)
                     $('#p' + i).addClass('remove');
+                    $('#productHead' + i).removeClass('selectedItem');
                 }
             }
+        }
+
+        function increment(inputFun) {
+            // alert(inputFun);
+            document.getElementById(inputFun).stepUp();
+        }
+
+        function decrement(inputFun) {
+            // alert(inputFun);
+            document.getElementById(inputFun).stepDown();
         }
     </script>
 

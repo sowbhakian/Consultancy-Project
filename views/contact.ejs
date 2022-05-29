@@ -24,9 +24,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #ffffff;
+            background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
+        }
+    </style>
+
 </head>
 
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgba(0, 0, 0, 0.644);">
         <a class="navbar-brand text-light" href="#" style="font-family: 'Spartan', sans-serif;">MARIAMMAL FOOD PRODUCTS </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,53 +56,98 @@
                     <a class="nav-link mr-3 ml-2 text-light" href="/contact">CONTACT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-3 ml-2 text-light" style="font-size: 120%;" href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a class="nav-link mr-3 ml-2 text-light" style="font-size: 120%;" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
                 </li>
+
             </ul>
+
+            <%if(username.length!=0){%>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <i class="fa-solid fa-user text-warning">  <%=username%></i>                        
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/logout">Log Out</a>
+                    </div>
+                </div>
+                <%}%>
         </div>
     </nav>
+
+
     <h2 class="text-center contact-head">CONTACT</h2>
     <div class="row container-fluid">
-        <div class="col-lg-10 col-md-5 col-sm-10 m-3">
-            <iframe class="map" src="https://www.google.com/maps/d/u/0/embed?mid=1J7gfLaZEkQHtwDXP2GFc05L2eTK_S8Px&ehbc=2E312F"></iframe>
-        </div>
+
         <div class="col-lg-6 col-md-5 col-sm-10 text-center ml-5" style="margin-top: 1%;">
-            <p><b>MARIAMMAL FOOD PRODUCTS</b><br> 55/10-B, Kuppusamy Street,<br> SALEM - 636002. <br> PHONE : 0427-4041272 <br> CELL : 9443621272 <br> E MAIL - prakash.7984@gmail.com <br>
-            </p>
+
         </div>
         <div class="col-lg-5 col-md-5 col-sm-10 text-center" style="margin-top: 1%;">
-            <p><b>M.S.FOOD PRODUCTS</b> <br> 2/1,rajakannu Street, <br> Arisipalayam, <br> SALEM - 636009. <br> CELL : 8220000998/7397111171 <br> E MAIL - annamfoodproduct2016@gmail.com <br>
-            </p>
+
         </div>
     </div>
     <div class="text-center mb-5" style="margin-top: 1%;">
-        <p><b>E.MUNIYAPPAN</b> <br> 142, Pal market, Shevapet <br> SALEM - 636002. <br> PHONE : 0427-2212917 <br> CELL : 9362110739 <br> E MAIL - prakash.7984@gmail.com <br>
-        </p>
+
     </div>
     <div class="contact-bod sep">
-        <div class="con">
-            <div class="content">
-                <div class="text-light">
-                    <div class="right-side">
-                        <div class="topic-text">Send us a message</div>
-                        <p>If you need any help from me or any types of queries related to website, you can send me message from here. It's my pleasure to help you.</p>
-                        <form action="#">
-                            <div class="input-box">
-                                <input type="text" placeholder="Enter your name">
-                            </div>
-                            <div class="input-box">
-                                <input type="text" placeholder="Enter your email">
-                            </div>
-                            <div class="input-box message-box">
-                                <textarea placeholder="Enter your message"></textarea>
-                            </div>
-                            <div class="button">
-                                <input type="button" value="Send Now">
-                            </div>
-                        </form>
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="col-lg-10 col-md-5 col-sm-10 m-3">
+                    <iframe class="map" src="https://www.google.com/maps/d/u/0/embed?mid=1J7gfLaZEkQHtwDXP2GFc05L2eTK_S8Px&ehbc=2E312F"></iframe>
+                </div>
+            </div>
+            <div class="con col-lg-6">
+                <div class="content">
+                    <div class="text-light">
+                        <div class="right-side">
+                            <div class="topic-text">Send us a message</div>
+                            <p>If you need any help from me or any types of queries related to website, you can send me message from here. It's my pleasure to help you.</p>
+                            <form action="mailto:sowbhakian.shansan@gmail.com" method="post">
+                                <div class="input-box">
+                                    <input type="text" name="email" placeholder="Enter your email">
+                                </div>
+                                <div class="input-box message-box">
+                                    <textarea name="message" placeholder="Enter your message"></textarea>
+                                </div>
+                                <div class="button">
+                                    <button type="submit" class="btn btn-primary">Send Now</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
+        </div>
+    </div>
+    <div class="row container-fluid contactTail">
+        <div class="col-lg-4 text-center">
+            <p><b>MARIAMMAL FOOD PRODUCTS</b>
+                <p> 55/10-B, Kuppusamy Street,</p>
+                <p> SALEM - 636002. </p>
+                <p> PHONE : 0427-4041272 </p>
+                <p> CELL : 9443621272 </p>
+                <p> E MAIL - prakash.7984@gmail.com </p>
+            </p>
+        </div>
+        <div class="col-lg-4 text-center">
+            <p><b>M.S.FOOD PRODUCTS</b>
+                <p> 2/1,rajakannu Street, </p>
+                <p> Arisipalayam, </p>
+                <p> SALEM - 636009. </p>
+                <p> CELL : 8220000998/7397111171 </p>
+                <p> E MAIL - annamfoodproduct2016@gmail.com </p>
+            </p>
+        </div>
+        <div class="col-lg-4 text-center">
+            <p><b>E.MUNIYAPPAN</b>
+                <p> 142, Pal market, Shevapet </p>
+                <p> SALEM - 636002. </p>
+                <p> PHONE : 0427-2212917 </p>
+                <p> CELL : 9362110739 </p>
+                <p>E MAIL - prakash.7984@gmail.com</p>
+            </p>
         </div>
     </div>
 </body>

@@ -37,6 +37,7 @@
 
 <body class="loginBG">
 
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgba(0, 0, 0, 0.644);">
         <a class="navbar-brand text-light" href="#" style="font-family: 'Spartan', sans-serif;">MARIAMMAL FOOD PRODUCTS </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,15 +58,29 @@
                     <a class="nav-link mr-3 ml-2 text-light" href="/contact">CONTACT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-3 ml-2 text-light" style="font-size: 120%;" href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a class="nav-link mr-3 ml-2 text-light" style="font-size: 120%;" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
                 </li>
+
             </ul>
+
+            <%if(username.length!=0){%>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <i class="fa-solid fa-user text-warning">  <%=username%></i>                        
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/logout">Log Out</a>
+                    </div>
+                </div>
+                <%}%>
         </div>
     </nav>
 
+    <!-- heading -->
     <section>
         <div>
             <section class="home col-lg-12 AllHeading">
+
                 <div class="welcomeDiv">
                     <h1 class=" text-center"> <span class="QuaHead">Welcome to Login/Signup</span>
                         <i class="far fa-laugh-wink"></i>
@@ -78,164 +93,177 @@
         </div>
         </section>
 
-        <div class=" loginbtn text-center">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCookie1">
-            <i class="fas fa-book ml-1"></i>USER</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adminLogin">
-                <i class="fas fa-book ml-1"></i>ADMIN</button>
-        </div>
+        <!-- Error Message -->
+        <%if((msg=="SingUp Failed! Re-Type the Correct Password") || (msg=="Wrong Password!") || (msg=="UserID Not Found! Pls SignUp") || (msg=="Wrong Admin Password!") ||(msg=="Wrong Admin UserID!")||(msg=="User-ID Already Exits!")||(msg=="Log In to ADD up your Product") ||(msg=="Log In to See the CART")){%>
+            <div class="alert alert-danger text-center alert-dismissible errorMsg">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                <strong><%=msg%></strong>
+            </div>
+            <%}else if(msg=="successfully Registed!"){%>
+                <div class="alert alert-success text-center alert-dismissible errorMsg">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                    <strong><%=msg%></strong>
+                </div>
+                <%}%>
+                    <!-- Buttons -->
+                    <div class=" loginbtn text-center">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCookie1">
+        <i class="fas fa-book ml-1"></i> USER</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adminLogin">
+            <i class="fas fa-book ml-1"></i> ADMIN</button>
+                    </div>
 
 
 
-        <!--Modal: LOGIN or SIGNIN-->
-        <div class="modal fade top" id="modalCookie1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
-            <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
-                <!--Content-->
-                <div class="modal-content ">
-                    <!--Body-->
-                    <div class="modal-body ">
-                        <div class="text-center modalBtn">
-                            <p class="pt-3 ">Please Choose?
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Login">
-                                <i class="fas fa-book ml-1"></i>lOGIN</button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signup">
-                                <i class="fas fa-book ml-1"></i>SIGNUP</button>
-                                <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">CANCEL</a>
-                            </p>
+                    <!--Modal: LOGIN or SIGNIN-->
+                    <div class="modal fade top" id="modalCookie1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
+                        <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
+                            <!--Content-->
+                            <div class="modal-content ">
+                                <!--Body-->
+                                <div class="modal-body ">
+                                    <div class="text-center modalBtn">
+                                        <p class="pt-3 ">Please Choose?
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Login">
+                            <i class="fas fa-book ml-1"></i> lOGIN</button>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signup">
+                            <i class="fas fa-book ml-1"></i> SIGNUP</button>
+                                            <a type="submit" class="btn btn-outline-primary waves-effect" data-dismiss="modal">CANCEL</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/.Content-->
                         </div>
                     </div>
-                </div>
-                <!--/.Content-->
-            </div>
-        </div>
 
-        <!--Modal:  Login-->
-        <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog cascading-modal" role="document">
+                    <!--Modal:  Login-->
+                    <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog cascading-modal" role="document">
 
-                <!--Content-->
-                <div class="modal-content">
+                            <!--Content-->
+                            <div class="modal-content">
 
-                    <!--Header-->
-                    <div class="modal-header light-blue darken-3 white-text">
-                        <h4 class="title"><i class="fas fa-users"></i> User Login</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-          aria-hidden="true">&times;</span></button>
-                    </div>
-                    <form action="/staffsign" method="post">
-                        <!--Body-->
-                        <div class="modal-body mb-0 text-center">
+                                <!--Header-->
+                                <div class="modal-header light-blue darken-3 white-text">
+                                    <h4 class="title"><i class="fas fa-users"></i> User Login</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+        aria-hidden="true">&times;</span></button>
+                                </div>
+                                <form action="/login" method="post">
+                                    <!--Body-->
+                                    <div class="modal-body mb-0 text-center">
 
-                            <div class="login__field">
-                                <i class="login__icon fas fa-user"></i>
-                                <input type="text" class="login__input" placeholder="User name" name="userName">
+                                        <div class="login__field">
+                                            <i class="login__icon fas fa-user"></i>
+                                            <input type="text" class="login__input" placeholder="User name" name="userName">
+                                        </div>
+                                        <div class="login__field">
+                                            <i class="login__icon fas fa-user"></i>
+                                            <input type="password" class="login__input" placeholder="Password" name="Password">
+                                        </div>
+                                        <div class="login__field">
+                                            <!-- <i class="login__icon fas fa-user"></i> -->
+
+                                            <button type="submit" class="btn btn-success">Login</button>
+                                        </div>
+
+                                    </div>
+                                </form>
                             </div>
-                            <div class="login__field">
-                                <i class="login__icon fas fa-user"></i>
-                                <input type="password" class="login__input" placeholder="User name" name="Password">
-                            </div>
-                            <div class="login__field">
-                                <!-- <i class="login__icon fas fa-user"></i> -->
-
-                                <button type="submit" class="btn btn-success">Login</button>
-                            </div>
+                            <!--/.Content-->
 
                         </div>
-                    </form>
-                </div>
-                <!--/.Content-->
-
-            </div>
-        </div>
-
-        <!--Modal:  signup-->
-        <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog cascading-modal" role="document">
-
-                <!--Content-->
-                <div class="modal-content">
-
-                    <!--Header-->
-                    <div class="modal-header light-blue darken-3 white-text">
-                        <h4 class="title"><i class="fas fa-users"></i>User Signup</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-          aria-hidden="true">&times;</span></button>
                     </div>
-                    <form action="/staffsign" method="post">
-                        <!--Body-->
-                        <div class="modal-body mb-0 text-center">
 
-                            <div class="login__field">
-                                <i class="login__icon fas fa-user"></i>
-                                <input type="text" class="login__input" placeholder="UserId" name="userName">
-                            </div>
-                            <div class="login__field">
-                                <i class="login__icon fas fa-user"></i>
-                                <input type="password" class="login__input" placeholder="Password" name="Password">
-                            </div>
-                            <div class="login__field">
-                                <i class="login__icon fas fa-user"></i>
-                                <input type="password" class="login__input" placeholder="Re-Type Password" name="Re-Password">
-                            </div>
-                            <div class="login__field">
-                                <i class="login__icon fas fa-user"></i>
-                                <input type="password" class="login__input" placeholder="Phone Number" name="phone">
-                            </div>
-                            <div class="login__field">
-                                <!-- <i class="login__icon fas fa-user"></i> -->
+                    <!--Modal:  signup-->
+                    <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog cascading-modal" role="document">
 
-                                <button type="submit" class="btn btn-success">Signup</button>
+                            <!--Content-->
+                            <div class="modal-content">
+
+                                <!--Header-->
+                                <div class="modal-header light-blue darken-3 white-text">
+                                    <h4 class="title"><i class="fas fa-users"></i>User Signup</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+        aria-hidden="true">&times;</span></button>
+                                </div>
+                                <form action="/signup" method="post">
+                                    <!--Body-->
+                                    <div class="modal-body mb-0 text-center">
+
+                                        <div class="login__field">
+                                            <i class="login__icon fas fa-user"></i>
+                                            <input type="text" class="login__input" placeholder="UserId" name="userName">
+                                        </div>
+                                        <div class="login__field">
+                                            <i class="login__icon fas fa-user"></i>
+                                            <input type="password" class="login__input" placeholder="Password" name="Password">
+                                        </div>
+                                        <div class="login__field">
+                                            <i class="login__icon fas fa-user"></i>
+                                            <input type="password" class="login__input" placeholder="Re-Type Password" name="RePassword">
+                                        </div>
+                                        <div class="login__field">
+                                            <i class="login__icon fas fa-user"></i>
+                                            <input type="number" class="login__input" placeholder="Phone Number" name="phone" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10">
+                                        </div>
+                                        <div class="login__field">
+                                            <!-- <i class="login__icon fas fa-user"></i> -->
+
+                                            <button type="submit" class="btn btn-success">Signup</button>
+                                        </div>
+
+                                    </div>
+                                </form>
                             </div>
+                            <!--/.Content-->
 
                         </div>
-                    </form>
-                </div>
-                <!--/.Content-->
-
-            </div>
-        </div>
-
-        <!--Modal: Admin Login-->
-        <div class="modal fade" id="adminLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog cascading-modal" role="document">
-
-                <!--Content-->
-                <div class="modal-content">
-
-                    <!--Header-->
-                    <div class="modal-header light-blue darken-3 white-text">
-                        <h4 class="title"><i class="fas fa-users"></i> Admin Login</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                     aria-hidden="true">&times;</span></button>
                     </div>
-                    <form action="/adminsign" method="post">
-                        <!--Body-->
-                        <div class="modal-body  text-center">
-                            <div class="login__field">
-                                <i class="login__icon fas fa-user"></i>
-                                <input type="text" class="login__input" placeholder="Admin User name" name="userId">
-                            </div>
-                            <div class="login__field">
-                                <i class="login__icon fas fa-user"></i>
-                                <input type="password" class="login__input" placeholder="Password" name="Password">
-                            </div>
-                            <div class="login__field">
-                                <!-- <i class="login__icon fas fa-user"></i> -->
 
-                                <button type="submit" class="btn btn-success">Go</button>
+                    <!--Modal: Admin Login-->
+                    <div class="modal fade" id="adminLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog cascading-modal" role="document">
+
+                            <!--Content-->
+                            <div class="modal-content">
+
+                                <!--Header-->
+                                <div class="modal-header light-blue darken-3 white-text">
+                                    <h4 class="title"><i class="fas fa-users"></i> Admin Login</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+                                </div>
+                                <form action="/adminsign" method="post">
+                                    <!--Body-->
+                                    <div class="modal-body  text-center">
+                                        <div class="login__field">
+                                            <i class="login__icon fas fa-user"></i>
+                                            <input type="text" class="login__input" placeholder="Admin User name" name="userid">
+                                        </div>
+                                        <div class="login__field">
+                                            <i class="login__icon fas fa-user"></i>
+                                            <input type="password" class="login__input" placeholder="Password" name="pass">
+                                        </div>
+                                        <div class="login__field">
+                                            <!-- <i class="login__icon fas fa-user"></i> -->
+
+                                            <button type="submit" class="btn btn-success">Go</button>
+                                        </div>
+
+                                    </div>
+                                </form>
                             </div>
+                            <!--/.Content-->
 
                         </div>
-                    </form>
-                </div>
-                <!--/.Content-->
-
-            </div>
-        </div>
+                    </div>
 
 
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+                    <!-- MDB core JavaScript -->
+                    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 
 
 

@@ -20,6 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unna&display=swap" rel="stylesheet">
 
     <!-- icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer"
@@ -28,6 +29,7 @@
 </head>
 
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgba(0, 0, 0, 0.644);">
         <a class="navbar-brand text-light" href="#" style="font-family: 'Spartan', sans-serif;">MARIAMMAL FOOD PRODUCTS </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,11 +50,25 @@
                     <a class="nav-link mr-3 ml-2 text-light" href="/contact">CONTACT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-3 ml-2 text-light" style="font-size: 120%;" href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a class="nav-link mr-3 ml-2 text-light" style="font-size: 120%;" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
                 </li>
+
             </ul>
+
+            <%if(username.length!=0){%>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <i class="fa-solid fa-user text-warning">  <%=username%></i>                        
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/logout">Log Out</a>
+                    </div>
+                </div>
+                <%}%>
         </div>
     </nav>
+
+
     <div class="body container-fluid">
         <h1 class="store-name">MARIAMMAL FOODS</h1>
         <h2 class="store-name" style="margin-top: 23%;">PLACE YOUR ORDERS WHERE YOUR ARE</h2>
@@ -66,6 +82,13 @@
                 <p class="cont overview">Your most favorite product store, your most trusted products, now at your fingertips! Order Online, get groceries conveniently delivered to your home.</p>
             </div>
             <div class="col-lg-5 col-md-5 col-sm-10">
+
+                <h2 class="text-center fa-4x  ">
+                    <p class="logo">
+
+                        MF
+                    </p>
+                </h2>
 
             </div>
             <div class="col-lg-5 col-md-5 col-sm-10">
