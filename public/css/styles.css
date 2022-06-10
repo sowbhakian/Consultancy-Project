@@ -420,3 +420,68 @@
     color: #ddd;
     border-radius: 2rem;
 }
+
+.inpRemove {
+    border: none;
+}
+
+.inpRemove::placeholder {
+    color: #af0000;
+}
+
+.cart-summary h5,
+.inpRemove {
+    color: #af0000;
+}
+
+.cart-summary b {
+    color: #000000;
+}
+
+.removea {
+    font-style: none;
+    color: white;
+}
+
+.removea:hover {
+    text-decoration: none;
+    color: #000000;
+}
+
+
+/* Delivery Status */
+
+.deliveryStsbrd {
+    /* padding: 0 30%; */
+}
+
+.innerBorder {
+    padding: 7% 0;
+    background-color: #c70700;
+    background-image: url("https://www.transparenttextures.com/patterns/brushed-alum.png");
+}
+
+.deliveryStsbrd h2 b {
+    color: #ddd;
+    font-family: 'Charis SIL', serif;
+    font-weight: bolder;
+}
+
+.deliveryCard {
+    text-indent: 5%;
+    font-family: 'Tai Heritage Pro', serif;
+}
+
+.deliveryCard h2 b {
+    font-weight: bolder;
+}
+
+.deliveryGrigGap {
+    padding: 0 2%;
+}
+
+.equal {
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+}

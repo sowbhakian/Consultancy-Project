@@ -157,19 +157,20 @@ const products = [{
     }]
 }]
 
+
+
 var username = "";
 var condition = false;
 var productList = [];
-// console.log(products[0].DAIRY[0].ProductName);
-// console.log(products[1].FILLING[1].ProductName);
-// database Host
+
 mongoose.connect("mongodb://localhost:27017/foodProduct", { useNewUrlParser: true });
 
 const userSchema = new mongoose.Schema({
     userid: { type: String, unique: true },
     password: String,
     phone: Number,
-    cart: [{ type: mongoose.Schema.Types.ObjectId, ref: 'cart' }]
+    cart: [{ type: mongoose.Schema.Types.ObjectId, ref: 'cart' }],
+    delivery: [{ type: mongoose.Schema.Types.ObjectId, ref: 'delivery' }]
 });
 const User = mongoose.model("userlogs", userSchema) //Collection-1
 
@@ -181,6 +182,16 @@ const cartSchema = new mongoose.Schema({
     quantity: Number
 })
 const Cart = mongoose.model("cart", cartSchema)
+
+
+const deliverySchema = new mongoose.Schema({
+    deliveryDate: Date,
+    address: String,
+    totalPrice: Number,
+    products: [{ productName: String, imageId: String, price: Number, quantity: Number }]
+})
+const Delivery = mongoose.model("delivery", deliverySchema)
+
 
 
 app.get("/", (req, res) => {
@@ -301,8 +312,7 @@ app.post("/adminsign", (req, res) => {
 // remover User
 app.post("/removeUser", (req, res) => {
     var id = req.body.id
-
-    // User.findOneAndDelete({age: {$gte:5} }, function (err, docs) {
+        // User.findOneAndDelete({age: {$gte:5} }, function (err, docs) {
     User.findOneAndDelete({ _id: id }, (err) => {
         if (!err) {
             User.find({}, (err, output) => {
@@ -391,6 +401,60 @@ app.post("/cart", (req, res) => {
         });
 
     }
+
+})
+
+app.get("/deliverysts", (req, res) => {
+
+    if (username != "") {
+        User.findOne({ userid: username }).populate('delivery').exec((err, output) => {
+            if (!err) {
+                // console.log(output.delivery[0]);
+                res.render("deliverysts", { username: username, products: output.delivery[0] });
+            }
+        })
+    } else {
+        res.render("login", { msg: "Log In to See Delivery status", username: "" });
+    }
+})
+
+// place Order
+app.post("/placeorder", (req, res) => {
+    var amount = req.body.amount;
+    var deliveryDate = req.body.deliveryDate;
+    var address = req.body.address;
+    console.log(amount);
+
+    User.findOne({ userid: username }).populate('cart').exec((err, usercart) => {
+        if (!err) {
+            const productArray = [];
+            usercart.cart.forEach(e => {
+                var productList = { productName: e.productName, imageId: e.imageId, price: e.price, quantity: e.quantity }
+                productArray.push(productList);
+            });
+
+            //Adding Delivery info
+            const newDelivery = new Delivery({
+                deliveryDate: deliveryDate,
+                address: address,
+                totalPrice: amount,
+                products: productArray
+            })
+            usercart.delivery.push(newDelivery);
+            usercart.cart = [];
+            usercart.save((error) => {
+                if (!error) {
+                    newDelivery.save((err) => {
+                        if (!err) {
+                            res.redirect("cart")
+                        }
+                    });
+                }
+            })
+
+        }
+    })
+
 
 })
 
