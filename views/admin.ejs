@@ -178,6 +178,7 @@
                                     <th class="text-center">S.No.</th>
                                     <th class="text-center">UserName</th>
                                     <th class="text-center">Phone No.</th>
+                                    <th class="text-center">Delivery Status</th>
                                     <th class="text-center">Remove User</th>
                                 </tr>
                             </thead>
@@ -195,6 +196,15 @@
                                             </td>
                                             <td class="text-center">
                                                 <%=e.phone%>
+                                            </td>
+                                            <td class="text-center">
+                                                <form action="/viewUserDeliveryProducts" method="post">
+                                                    <input type="hidden" name="id" value="<%=e._id%>">
+                                                    <button type="submit" class="removerBorder">
+                                                <button type="submit" class="btn btn-success">Show</button>
+                                                    </button>
+                                                </form>
+
                                             </td>
                                             <td class="text-center">
                                                 <form action="/removeUser" method="post">

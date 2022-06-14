@@ -461,7 +461,7 @@
     background-image: url("https://www.transparenttextures.com/patterns/brushed-alum.png");
 }
 
-.deliveryStsbrd h2 b {
+.deliveryStsbrd h4 b {
     color: #ddd;
     font-family: 'Charis SIL', serif;
     font-weight: bolder;
@@ -472,7 +472,7 @@
     font-family: 'Tai Heritage Pro', serif;
 }
 
-.deliveryCard h2 b {
+.deliveryCard h4 b {
     font-weight: bolder;
 }
 
