@@ -40,27 +40,18 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgba(0, 0, 0, 0.644);">
         <a class="navbar-brand text-light" href="#" style="font-family: 'Spartan', sans-serif;">MARIAMMAL FOOD PRODUCTS </a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto ">
                 <li class="nav-item">
-                    <a class="nav-link mr-3 ml-2 text-light" href="/">HOME</a>
+                    <a class="nav-link mr-3 ml-2 text-light" href="/admin">USER LOGS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-3 ml-2 text-light" href="/product">PRODUCT</a>
+                    <a class="nav-link mr-3 ml-2 text-light" href="/delivery">DELIVERY</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link mr-3 ml-2 text-light" href="/login">LOGIN</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mr-3 ml-2 text-light" href="/contact">CONTACT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mr-3 ml-2 text-light" style="font-size: 120%;" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-                </li>
-
             </ul>
 
             <%if(username.length!=0){%>
@@ -69,13 +60,14 @@
                         <i class="fa-solid fa-user text-warning">  <%=username%></i>                        
                     </button>
                     <div class="dropdown-content">
-                        <a href="/logout">Log Out</a>
+                        <a href="/logoutAdmin">Log Out</a>
                     </div>
                 </div>
                 <%}%>
-        </div>
-    </nav>
 
+        </div>
+
+    </nav>
 
 
     <!-- products -->
@@ -117,7 +109,6 @@
 
             </div>
     </section>
-
 
 
     <!-- Details Delivery -->

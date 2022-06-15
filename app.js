@@ -160,6 +160,7 @@ const products = [{
 
 
 var username = "";
+var adminSign = "admin";
 var condition = false;
 var productList = [];
 
@@ -208,12 +209,16 @@ app.get("/contact", (req, res) => {
     res.render("contact", { username: username });
 })
 app.get("/admin", (req, res) => {
-
-    User.find({}, (err, output) => {
-        if (!err) {
-            res.render("admin", { userlist: output, msg: "" });
-        }
-    })
+    if (adminSign != "") {
+        User.find({}, (err, output) => {
+            if (!err) {
+                console.log(adminSign);
+                res.render("admin", { userlist: output, msg: "", username: adminSign });
+            }
+        })
+    } else {
+        res.render("login", { msg: "Login To Admin Pannel", username: "" });
+    }
 })
 
 
@@ -296,13 +301,13 @@ app.post("/adminsign", (req, res) => {
 
     if (userid == "admin") {
         if (pass == "admin") {
+            adminSign = "admin"
             res.redirect("admin");
-            // console.log("Successfully Loged in Admin page");
         } else {
-            res.render("login", { msg: "Wrong Admin Password!", username: username });
+            res.render("login", { msg: "Wrong Admin Password!", username: adminSign });
         }
     } else {
-        res.render("login", { msg: "Wrong Admin UserID!", username: username });
+        res.render("login", { msg: "Wrong Admin UserID!", username: adminSign });
     }
 
 })
@@ -315,8 +320,6 @@ app.get("/cart", (req, res) => {
     } else {
         User.findOne({ userid: username }).populate('cart').exec((err, output) => {
             if (!err) {
-                // console.log(output.cart);
-                // console.log(username);
                 res.render("cart", { found: output.cart, NoOfProducts: 1, username: username });
             }
         })
@@ -497,11 +500,28 @@ app.post("/viewUserDeliveryProducts", (req, res) => {
     })
 })
 
+app.get("/toDelivery", (req, res) => {
+    if (adminSign != "") {
+
+
+        res.render("toDelivery", { username: adminSign })
+    } else {
+        res.render("login", { msg: "Login To Admin Pannel", username: "" });
+    }
+})
+
+
 // Log Out
 app.get("/logout", (req, res) => {
     username = ""
     res.redirect("/")
 })
+app.get("/logoutAdmin", (req, res) => {
+    adminSign = ""
+    res.redirect("/")
+})
+
+
 app.listen(9000, () => {
     console.log("server is running on port 9000");
 })

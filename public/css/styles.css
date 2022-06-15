@@ -485,3 +485,93 @@
     display: -webkit-flex;
     flex-wrap: wrap;
 }
+
+
+/* ToDelivery  - Card*/
+
+.QuaHead {
+    color: darkblue;
+}
+
+.card {
+    font-family: 'Bree Serif';
+    color: #000268;
+    background: transparent;
+    box-shadow: 5px 2px 10px rgb(49, 49, 49);
+}
+
+.card:hover {
+    box-shadow: 5px 2px 20px rgb(49, 49, 49);
+}
+
+.cardWhole {
+    text-align: center;
+    padding: 3% 3%;
+}
+
+.cardHeader {
+    font-size: 1.5rem;
+    color: #000000;
+    margin-top: 2%;
+}
+
+.cardBody {
+    text-align: left;
+    margin-left: 10%;
+}
+
+.CardIcons {
+    background-color: white;
+    color: darkblue;
+    padding: 3% 3%;
+    border-radius: 1rem;
+    font-size: larger;
+    background-image: url("https://www.transparenttextures.com/patterns/diamond-eyes.png");
+}
+
+.far {
+    color: darkblue;
+}
+
+.cardText {
+    color: #000268;
+    margin-left: 5%;
+}
+
+.cardList {
+    margin: 5% 0;
+}
+
+.skillEnd {
+    margin-bottom: 5%;
+}
+
+.EventRegsButton {
+    margin-bottom: 2%;
+    text-align: center;
+}
+
+.addButton {
+    color: black;
+}
+
+.addButton:hover {
+    color: rgb(0, 0, 182);
+}
+
+.cardList input {
+    text-align: right;
+}
+
+.modelBackGroung {
+    color: rgb(158, 157, 157);
+    background-image: url("https://www.transparenttextures.com/patterns/diamond-eyes.png");
+}
+
+.cartNum {
+    padding: 2% 2%;
+    margin-left: 1%;
+    background-color: #000000;
+    color: rgb(219, 164, 0);
+    border-radius: 10rem;
+}
