@@ -130,31 +130,40 @@
                         <div class=" col-lg-3 text-center">
                             <div class="deliveryStsbrd">
                                 <div class="border border-danger innerBorder">
-                                    <h4>
+                                    <h3>
                                         <b>Delivery Date :</b>
-                                        <p>
-                                            <%=products[i].deliveryDate.toLocaleDateString() %>
-                                        </p>
-                                    </h4>
-                                    <h4>
-                                        <b>Address:  </b>
-                                        <p>
-                                            <%=products[i].address%>
-                                    </h4>
-                                    <h4>
+
+                                        <%=products[i].deliveryDate.toLocaleDateString() %>
+
+                                    </h3>
+                                    <h3>
                                         <b>Total Price: </b>
-                                        <p>
-                                            <%=products[i].totalPrice%>
-                                        </p>
-                                    </h4>
-                                    <h4>
+
+                                        <%=products[i].totalPrice%>
+
+                                    </h3>
+
+                                    <h3>
                                         <b>Paid Status: </b>
-                                        <p class="text-warning">
-                                            <u>
+
+                                        <u class="text-warning">
                                                 <%=products[i].paidStatus%>
                                             </u>
-                                        </p>
-                                    </h4>
+
+                                    </h3>
+                                    <h3>
+                                        <b>Delivered Status: </b>
+
+                                        <u class="text-warning">
+                                                <%=products[i].deliveryStatus%>
+                                            </u>
+
+                                    </h3>
+                                    <h3>
+                                        <b>Address:  </b>
+
+                                        <%=products[i].address%>
+                                    </h3>
                                 </div>
                             </div>
                         </div>

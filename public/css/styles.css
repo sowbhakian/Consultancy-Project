@@ -456,12 +456,14 @@
 }
 
 .innerBorder {
+    text-indent: 5%;
+    text-align: left;
     padding: 7% 0;
     background-color: #c70700;
     background-image: url("https://www.transparenttextures.com/patterns/brushed-alum.png");
 }
 
-.deliveryStsbrd h4 b {
+.deliveryStsbrd h3 b {
     color: #ddd;
     font-family: 'Charis SIL', serif;
     font-weight: bolder;
@@ -472,7 +474,7 @@
     font-family: 'Tai Heritage Pro', serif;
 }
 
-.deliveryCard h4 b {
+.deliveryCard h3 b {
     font-weight: bolder;
 }
 

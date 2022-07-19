@@ -159,7 +159,7 @@ const products = [{
 
 
 
-var username = "";
+var username = "asd";
 var adminSign = "admin";
 var condition = false;
 var productList = [];
@@ -171,7 +171,8 @@ const userSchema = new mongoose.Schema({
     password: String,
     phone: Number,
     cart: [{ type: mongoose.Schema.Types.ObjectId, ref: 'cart' }],
-    delivery: [{ type: mongoose.Schema.Types.ObjectId, ref: 'delivery' }]
+    delivery: [{ type: mongoose.Schema.Types.ObjectId, ref: 'delivery' }],
+    history: [{ type: mongoose.Schema.Types.ObjectId, ref: 'history' }]
 });
 const User = mongoose.model("userlogs", userSchema) //Collection-1
 
@@ -184,15 +185,27 @@ const cartSchema = new mongoose.Schema({
 })
 const Cart = mongoose.model("cart", cartSchema)
 
-
+//Delivery
 const deliverySchema = new mongoose.Schema({
     deliveryDate: Date,
     address: String,
     totalPrice: Number,
     paidStatus: { type: String, default: "Not Paid" },
+    deliveryStatus: { type: String, default: "Not Done" },
     products: [{ productName: String, imageId: String, price: Number, quantity: Number }]
 })
 const Delivery = mongoose.model("delivery", deliverySchema)
+
+//History
+const historySchema = new mongoose.Schema({
+    deliveryDate: Date,
+    address: String,
+    totalPrice: Number,
+    paidStatus: { type: String, default: "Not paid" },
+    deliveryStatus: { type: String, default: "Done" },
+    products: [{ productName: String, imageId: String, price: Number, quantity: Number }]
+})
+const History = mongoose.model("history", historySchema)
 
 
 
@@ -502,16 +515,18 @@ app.post("/viewUserDeliveryProducts", (req, res) => {
 
 app.get("/toDelivery", (req, res) => {
     if (adminSign != "") {
-
-
-        res.render("toDelivery", { username: adminSign })
+        User.findOne({}).populate('delivery').exec((err, output) => {
+            if (!err) {
+                res.render("toDelivery", { username: adminSign, userArray:output })
+            }
+        })
     } else {
         res.render("login", { msg: "Login To Admin Pannel", username: "" });
     }
 })
 
 
-// Log Out
+// Log Out  
 app.get("/logout", (req, res) => {
     username = ""
     res.redirect("/")

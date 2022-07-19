@@ -91,38 +91,39 @@
         <!-- Main Event-->
         <div class="row">
 
-
-            <div class="col-lg-3 col-md-3 cardWhole" data-aos="flip-right" data-aos-duration="1000">
-                <div class="card">
-                    <div class="cardHeader"> UserName
-                        <form action="/updateDelivery" method="post">
-                            <button type="submit " class="btn btn-danger">Delivered</button>
-                        </form>
-                        <hr>
-                    </div>
-
-                    <div class="cardBody ">
-                        <div class="cardList ">
-                            <i class="far fa-clock CardIcons "></i> <span class="cardText "> Delivery Date - asdasd</span>
-                        </div>
-
-                        <div class="cardList ">
-                            <i class="fa-solid fa-indian-rupee-sign CardIcons"></i> <span class="cardText "> Total Price: - asdasd</span>
-                        </div>
-                        <div class="cardList ">
-                            <i class="fas fa-envelope-open-text CardIcons "></i> <span class="cardText "> Address - asdasd</span>
-                        </div>
-
-                        <div class="EventRegsButton ">
-                            <form action="/enrollmentView" method="post">
-                                <input type="hidden" name="eventName" value="asd">
-                                <button type="submit" class="btn btn-outline-primary">View Orders</button>
+            <% userArray.forEach(e => { %>
+                <div class="col-lg-3 col-md-3 cardWhole" data-aos="flip-right" data-aos-duration="1000">
+                    <div class="card">
+                        <div class="cardHeader"> <%=e.userid>
+                            <form action="/updateDelivery" method="post">
+                                <input type="hidden" name="id" value="">
+                                <button type="submit " class="btn btn-danger">Delivered</button>
                             </form>
+                            <hr>
+                        </div>
+
+                        <div class="cardBody ">
+                            <div class="cardList ">
+                                <i class="far fa-clock CardIcons "></i> <span class="cardText "> Delivery Date - <%=e.delivery%></span>
+                            </div>
+
+                            <div class="cardList ">
+                                <i class="fa-solid fa-indian-rupee-sign CardIcons"></i> <span class="cardText "> Total Price: - asdasd</span>
+                            </div>
+                            <div class="cardList ">
+                                <i class="fas fa-envelope-open-text CardIcons "></i> <span class="cardText "> Address - asdasd</span>
+                            </div>
+
+                            <div class="EventRegsButton ">
+                                <form action="/enrollmentView" method="post">
+                                    <input type="hidden" name="eventName" value="asd">
+                                    <button type="submit" class="btn btn-outline-primary">View Orders</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
+                <% }); %>
 
         </div>
     </section>
