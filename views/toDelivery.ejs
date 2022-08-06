@@ -94,7 +94,7 @@
             <% userArray.forEach(e => { %>
                 <div class="col-lg-3 col-md-3 cardWhole" data-aos="flip-right" data-aos-duration="1000">
                     <div class="card">
-                        <div class="cardHeader"> <%=e.userid>
+                        <div class="cardHeader"> <%= e.userid %>
                             <form action="/updateDelivery" method="post">
                                 <input type="hidden" name="id" value="">
                                 <button type="submit " class="btn btn-danger">Delivered</button>
@@ -104,7 +104,7 @@
 
                         <div class="cardBody ">
                             <div class="cardList ">
-                                <i class="far fa-clock CardIcons "></i> <span class="cardText "> Delivery Date - <%=e.delivery%></span>
+                                <i class="far fa-clock CardIcons "></i> <span class="cardText "> Delivery Date - <%= e.delivery %></span>
                             </div>
 
                             <div class="cardList ">
@@ -123,7 +123,7 @@
                         </div>
                     </div>
                 </div>
-                <% }); %>
+                <% }) %>
 
         </div>
     </section>

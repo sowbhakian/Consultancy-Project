@@ -157,14 +157,14 @@ const products = [{
     }]
 }]
 
+mongoose.connect("mongodb://localhost:27017/foodProduct", { useNewUrlParser: true });
 
 
-var username = "asd";
+var username = "";
 var adminSign = "admin";
 var condition = false;
 var productList = [];
 
-mongoose.connect("mongodb://localhost:27017/foodProduct", { useNewUrlParser: true });
 
 const userSchema = new mongoose.Schema({
     userid: { type: String, unique: true },
@@ -187,6 +187,7 @@ const Cart = mongoose.model("cart", cartSchema)
 
 //Delivery
 const deliverySchema = new mongoose.Schema({
+    userid: String,
     deliveryDate: Date,
     address: String,
     totalPrice: Number,
@@ -198,6 +199,7 @@ const Delivery = mongoose.model("delivery", deliverySchema)
 
 //History
 const historySchema = new mongoose.Schema({
+    userid: String,
     deliveryDate: Date,
     address: String,
     totalPrice: Number,
@@ -210,30 +212,80 @@ const History = mongoose.model("history", historySchema)
 
 
 app.get("/", (req, res) => {
-    res.render("index", { username: username });
+    res.render("index", { username: username, cartCount: 0 });
 })
 app.get("/login", (req, res) => {
-    res.render("login", { msg: "", username: username });
+    if (username == "") {
+        res.render("login", { msg: "", username: username, cartCount: 0 });
+    } else {
+        User.findOne({ userid: username }).populate('cart').exec((err, output) => {
+            if (!err) {
+                res.render("login", { msg: "Log Out for another login!", username: username, cartCount: output.cart.length });
+            }
+        })
+
+    }
 })
 app.get("/product", (req, res) => {
-    res.render("product", { products: products, username: username });
+    if (username == "") {
+        res.render("product", { products: products, username: username, cartCount: 0 });
+    } else {
+        User.findOne({ userid: username }).populate('history').exec((err, output) => {
+            if (!err) {
+                res.render("product", { products: products, username: username, cartCount: output.cart.length });
+            }
+        })
+    }
 })
 app.get("/contact", (req, res) => {
-    res.render("contact", { username: username });
+    if (username == "") {
+        res.render("contact", { username: username, cartCount: 0 });
+    } else {
+        User.findOne({ userid: username }).populate('history').exec((err, output) => {
+            if (!err) {
+                res.render("contact", { username: username, cartCount: output.cart.length });
+            }
+        })
+    }
 })
+
+//Admin
 app.get("/admin", (req, res) => {
     if (adminSign != "") {
         User.find({}, (err, output) => {
             if (!err) {
-                console.log(adminSign);
+                // console.log(adminSign);
                 res.render("admin", { userlist: output, msg: "", username: adminSign });
             }
         })
     } else {
-        res.render("login", { msg: "Login To Admin Pannel", username: "" });
+        res.render("login", { msg: "Login To Admin Pannel", username: "", cartCount: 0 });
     }
 })
 
+//Admin
+app.get("/delivery", (req, res) => {
+    Delivery.find({}, (err, output) => {
+        if (!err) {
+
+            res.render("yetToDelivery", { products: output, username: adminSign });
+        }
+    })
+})
+
+
+app.get("/history", (req, res) => {
+    if (username == "") {
+        res.render("login", { msg: "Log In to See the HISTORY", username: "", cartCount: 0 });
+    } else {
+        User.findOne({ userid: username }).populate('history').exec((err, output) => {
+            if (!err) {
+                res.render("history", { products: output.history, username: username, cartCount: output.cart.length });
+
+            }
+        })
+    }
+})
 
 // Login
 app.post("/login", (req, res) => {
@@ -273,10 +325,10 @@ app.post("/login", (req, res) => {
                     }
 
                 } else {
-                    res.render("login", { msg: "Wrong Password!", username: username });
+                    res.render("login", { msg: "Wrong Password!", username: username, cartCount: 0 });
                 }
             } else {
-                res.render("login", { msg: "UserID Not Found! Pls SignUp", username: username });
+                res.render("login", { msg: "UserID Not Found! Pls SignUp", username: username, cartCount: 0 });
             }
         }
     })
@@ -291,7 +343,7 @@ app.post("/signup", (req, res) => {
         if (!err) {
             if (!output) {
                 if (pass != repass) {
-                    res.render("login", { msg: "SingUp Failed! Re-Type the Correct Password", username: username });
+                    res.render("login", { msg: "SingUp Failed! Re-Type the Correct Password", username: username, cartCount: 0 });
                 } else {
                     const newuser = new User({
                         userid: userid,
@@ -299,10 +351,10 @@ app.post("/signup", (req, res) => {
                         phone: phone
                     })
                     newuser.save()
-                    res.render("login", { msg: "successfully Registed!", username: username });
+                    res.render("login", { msg: "successfully Registed!", username: username, cartCount: 0 });
                 }
             } else {
-                res.render("login", { msg: "User-ID Already Exits!", username: username });
+                res.render("login", { msg: "User-ID Already Exits!", username: username, cartCount: 0 });
             }
         }
     })
@@ -329,11 +381,11 @@ app.post("/adminsign", (req, res) => {
 app.get("/cart", (req, res) => {
 
     if (username == "") {
-        res.render("login", { msg: "Log In to See the CART", username: "" });
+        res.render("login", { msg: "Log In to See the CART", username: "", cartCount: 0 });
     } else {
         User.findOne({ userid: username }).populate('cart').exec((err, output) => {
             if (!err) {
-                res.render("cart", { found: output.cart, NoOfProducts: 1, username: username });
+                res.render("cart", { found: output.cart, NoOfProducts: 1, username: username, cartCount: output.cart.length });
             }
         })
     }
@@ -351,7 +403,7 @@ app.post("/cart", (req, res) => {
         productList.push(imageId)
         productList.push(quantity)
         productList.push(quantity * price)
-        res.render("login", { msg: "Log In to ADD up your Product", username: "" });
+        res.render("login", { msg: "Log In to ADD up your Product", username: "", cartCount: 0 });
     } else {
 
         // console.log(userid);
@@ -401,20 +453,25 @@ app.post("/cart", (req, res) => {
 
 })
 app.get("/deliverysts", (req, res) => {
-
         if (username != "") {
             User.findOne({ userid: username }).populate('delivery').exec((err, output) => {
                 if (!err) {
-                    console.log(output.delivery);
+                    // console.log(output.delivery);
                     if (output.delivery[0] == undefined) {
-                        res.render("deliverysts", { username: username, products: [] });
+                        res.render("deliverysts", { username: username, products: [], cartCount: 0 });
                     } else {
-                        res.render("deliverysts", { username: username, products: output.delivery });
+                        User.findOne({ userid: username }).populate('cart').populate('delivery').exec((err, output) => {
+                            if (!err) {
+                                res.render("deliverysts", { username: username, products: output.delivery, cartCount: output.cart.length });
+
+                            }
+                        })
+
                     }
                 }
             })
         } else {
-            res.render("login", { msg: "Log In to See Delivery status", username: "" });
+            res.render("login", { msg: "Log In to See Delivery status", username: "", cartCount: 0 });
         }
     })
     // place Order
@@ -422,7 +479,7 @@ app.post("/placeorder", (req, res) => {
         var amount = req.body.amount;
         var deliveryDate = req.body.deliveryDate;
         var address = req.body.address;
-        console.log(amount);
+        // console.log(amount);
 
         User.findOne({ userid: username }).populate('cart').exec((err, usercart) => {
             if (!err) {
@@ -434,6 +491,7 @@ app.post("/placeorder", (req, res) => {
 
                 //Adding Delivery info
                 const newDelivery = new Delivery({
+                    userid: username,
                     deliveryDate: deliveryDate,
                     address: address,
                     totalPrice: amount,
@@ -470,6 +528,7 @@ app.post("/removeProduct", (req, res) => {
                     if (index > -1) {
                         output.cart.splice(index, 1); // 2nd parameter means remove one item only
                     }
+
                     output.save((err) => {
                         if (!err) {
                             res.redirect("/cart")
@@ -517,11 +576,11 @@ app.get("/toDelivery", (req, res) => {
     if (adminSign != "") {
         User.findOne({}).populate('delivery').exec((err, output) => {
             if (!err) {
-                res.render("toDelivery", { username: adminSign, userArray:output })
+                res.render("toDelivery", { username: adminSign, userArray: output })
             }
         })
     } else {
-        res.render("login", { msg: "Login To Admin Pannel", username: "" });
+        res.render("login", { msg: "Login To Admin Pannel", username: "", cartCount: 0 });
     }
 })
 
@@ -536,6 +595,64 @@ app.get("/logoutAdmin", (req, res) => {
     res.redirect("/")
 })
 
+app.post("/paid", (req, res) => {
+    var user = req.body.user;
+    var id = req.body.id;
+
+    Delivery.updateOne({ userid: user, _id: id }, { paidStatus: "Paid" }, (err, output) => {
+        res.redirect("/delivery");
+    })
+})
+
+app.post("/delivered", (req, res) => {
+    var user = req.body.user;
+    var id = req.body.id;
+    Delivery.updateOne({ userid: user, _id: id }, { deliveryStatus: "Done" }, (err, output) => {
+        if (!err) {
+            const productArray = [];
+            Delivery.findOne({ userid: user }, (err, output) => {
+                output.products.forEach(e => {
+                    var productList = { productName: e.productName, imageId: e.imageId, price: e.price, quantity: e.quantity }
+                    productArray.push(productList);
+                });
+                const newHistory = new History({
+                    userid: output.userid,
+                    deliveryDate: output.deliveryDate,
+                    address: output.address,
+                    totalPrice: output.totalPrice,
+                    paidStatus: output.paidStatus,
+                    deliveryStatus: "Delivered",
+                    products: productArray
+                })
+                newHistory.save((e) => {
+                    if (!e) {
+                        Delivery.deleteOne({ _id: id }, (err) => {
+                            if (!err) {
+                                User.findOne({ userid: output.userid }).populate('cart').populate('delivery').exec((err, history) => {
+                                    if (!err) {
+
+                                        const index = history.delivery.indexOf(id);
+                                        if (index > -1) {
+                                            history.delivery.splice(index, 1); // 2nd parameter means remove one item only
+                                        }
+
+                                        history.history.push(newHistory)
+                                        history.save((err) => {
+                                            if (!err) {
+                                                res.redirect("/delivery");
+                                                // res.redirect("/");
+                                            }
+                                        })
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            })
+        }
+    })
+})
 
 app.listen(9000, () => {
     console.log("server is running on port 9000");

@@ -571,9 +571,9 @@
 }
 
 .cartNum {
-    padding: 2% 2%;
+    padding: 15% 15%;
     margin-left: 1%;
-    background-color: #000000;
+    background-color: #0000006e;
     color: rgb(219, 164, 0);
     border-radius: 10rem;
 }
