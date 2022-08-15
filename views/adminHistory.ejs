@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>History</title>
     <link rel="stylesheet" href="css/styles.css">
     <!-- bootstrap links -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -14,9 +14,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <!-- <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet"> -->
-    <!-- <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script> -->
-
 
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,8 +42,8 @@
         <a class="navbar-brand text-light" href="#" style="font-family: 'Spartan', sans-serif;">MARIAMMAL FOOD PRODUCTS </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
+    <span class="navbar-toggler-icon"></span>
+    </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto ">
                 <li class="nav-item">
@@ -55,16 +52,13 @@
                 <li class="nav-item">
                     <a class="nav-link mr-3 ml-2 text-light" href="/delivery">DELIVERY</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link mr-3 ml-2 text-light" href="/feedBack">FEEDBACK</a>
-                </li>
             </ul>
 
             <%if(username.length!=0){%>
                 <div class="dropdown">
                     <button class="dropbtn">
-                        <i class="fa-solid fa-user text-warning">  <%=username%></i>                        
-                    </button>
+                    <i class="fa-solid fa-user text-warning">  <%=username%></i>                        
+                </button>
                     <div class="dropdown-content">
                         <a href="/logoutAdmin">Log Out</a>
                     </div>
@@ -81,15 +75,15 @@
             <section class="home col-lg-12 AllHeadingAdmin">
 
                 <div class="welcomeDivAdmin">
-                    <h1 class=" text-center"> <span class="QuaHead">Orders Yet To Deliver</span>
+                    <h1 class=" text-center"> <span class="QuaHead">History Logs</span>
                     </h1>
                     <div class="pl-5 pr-5">
                         <hr class="text-dark border border-1">
                     </div>
+
                 </div>
         </div>
         </section>
-
 
 
         <!-- products -->
@@ -119,11 +113,11 @@
                 <%}else{%>
             </div>
             </div>
-            <div class="text-center">
+            <div class="text-center ">
                 <p>
 
                     <i class="fa-solid fa-folder-open" style="font-size: 700%;"></i>
-                    <span class="mt-3 fa-2x"> No Delivery Products </span>
+                    <span class="mt-3 fa-2x"> Not History Products</span>
                 </p>
             </div>
             </div>
@@ -131,6 +125,7 @@
 
                 </div>
         </section>
+
 
 
         <!-- Details Delivery -->
@@ -142,63 +137,41 @@
                         <div class="row">
                             <div class=" col-lg-3 text-center">
                                 <div class="deliveryStsbrd">
-                                    <div class="border innerBorder">
-                                        <h4>
-                                            <b>User Name :</b>
-                                            <p>
-                                                <%=products[i].userid %>
-                                            </p>
-                                        </h4>
-                                        <h4>
+                                    <div class="border border-danger innerBorder">
+                                        <h3>
                                             <b>Delivery Date :</b>
-                                            <p>
-                                                <%=products[i].deliveryDate.toLocaleDateString() %>
-                                            </p>
-                                        </h4>
-                                        <h4>
-                                            <b>Address:  </b>
-                                            <p>
-                                                <%=products[i].address%>
-                                            </p>
-                                        </h4>
-                                        <h4>
+
+                                            <%=products[i].deliveryDate.toLocaleDateString() %>
+
+                                        </h3>
+                                        <h3>
                                             <b>Total Price: </b>
-                                            <p>
-                                                <%=products[i].totalPrice%>
-                                            </p>
-                                        </h4>
-                                        <h4>
+
+                                            <%=products[i].totalPrice%>
+
+                                        </h3>
+
+                                        <h3>
                                             <b>Paid Status: </b>
-                                            <p class="text-warning">
-                                                <u>
-                                                <% if(products[i].paidStatus == "Not Paid" && products[i].deliveryStatus == "Not Done") {%>
-                                                <form action="/paid" method="post">
-                                                    <input type="hidden" name="user" value="<%=products[i].userid %>">
-                                                    <input type="hidden" name="id" value="<%=products[i]._id %>">
-                                                    <button class="btn btn-success" type="submit" onclick="confirm('Confirm to update as paid')">Not Paid</button>
-                                                </form>
-                                                <% }else { %>
-                                                    <button class="btn btn-success" type="button" disabled>Paid</button>
-                                                    <% } %>
+
+                                            <u class="text-warning">
+                                                <%=products[i].paidStatus%>
                                             </u>
-                                            </p>
-                                        </h4>
-                                        <h4>
-                                            <b>Delivery Status: </b>
-                                            <p class="text-warning">
-                                                <u>
-                                                <% if(products[i].paidStatus == "Not Paid" && products[i].deliveryStatus == "Not Done") {%>
-                                                    <button class="btn btn-success" type="button" disabled>Not Delivered</button>
-                                                    <% }else { %>
-                                                        <form action="/delivered" method="post">
-                                                            <input type="hidden" name="user" value="<%=products[i].userid %>">
-                                                            <input type="hidden" name="id" value="<%=products[i]._id %>">
-                                                            <button class="btn btn-success" type="submit" onclick="confirm('Confirm to update as delivered')">Not Delivered</button>
-                                                        </form>
-                                                    <% } %>
+
+                                        </h3>
+                                        <h3>
+                                            <b>Delivered Status: </b>
+
+                                            <u class="text-warning">
+                                                <%=products[i].deliveryStatus%>
                                             </u>
-                                            </p>
-                                        </h4>
+
+                                        </h3>
+                                        <h3>
+                                            <b>Address:  </b>
+
+                                            <%=products[i].address%>
+                                        </h3>
                                     </div>
                                 </div>
                             </div>

@@ -81,145 +81,162 @@
 
 
 
-    <!-- products -->
-    <section>
-        <div class="container-fluid">
-            <h2 class="ProductHeading">History Logs</h2>
-            <div class="row pb-5">
-                <input id="totproduct" type="hidden" value="<%=products.length%>">
-                <%if(products.length!=0){%>
 
-                    <%for(var i=0;i< products.length;i++){%>
-                        <%if(i==0){%>
-                            <div class="col-lg-2 productButton selectedItem " id="productHead<%=i%>" onclick="productDiplay('<%=i%>')">
-                                <p>Order
-                                    <%=i+1%>
-                                </p>
-                            </div>
-                            <%}else{%>
-                                <div class="col-lg-2 productButton" id="productHead<%=i%>" onclick="productDiplay('<%=i%>')">
+    <section>
+        <div>
+            <section class="home col-lg-12 AllHeadingAdmin">
+
+                <div class="welcomeDivAdmin">
+                    <h1 class=" text-center"> <span class="QuaHead">History Logs</span>
+                    </h1>
+                    <div class="pl-5 pr-5">
+                        <hr class="text-dark border border-1">
+                    </div>
+
+                </div>
+        </div>
+        </section>
+
+
+
+        <!-- products -->
+        <section>
+            <div class="container-fluid">
+                <div class="row pb-5">
+                    <input id="totproduct" type="hidden" value="<%=products.length%>">
+                    <%if(products.length!=0){%>
+
+                        <%for(var i=0;i< products.length;i++){%>
+                            <%if(i==0){%>
+                                <div class="col-lg-2 productButton selectedItem " id="productHead<%=i%>" onclick="productDiplay('<%=i%>')">
                                     <p>Order
                                         <%=i+1%>
                                     </p>
                                 </div>
+                                <%}else{%>
+                                    <div class="col-lg-2 productButton" id="productHead<%=i%>" onclick="productDiplay('<%=i%>')">
+                                        <p>Order
+                                            <%=i+1%>
+                                        </p>
+                                    </div>
 
-                                <%}%>
                                     <%}%>
+                                        <%}%>
+                </div>
+                <%}else{%>
             </div>
-            <%}else{%>
-        </div>
-        </div>
-        <div class="text-center ">
-            <p>
-
-                <i class="fa-solid fa-folder-open" style="font-size: 700%;"></i>
-                <span class="mt-3 fa-2x"> No Delivery Products </span>
-            </p>
-        </div>
-        </div>
-        <%}%>
-
             </div>
-    </section>
+            <div class="text-center ">
+                <p>
+
+                    <i class="fa-solid fa-folder-open" style="font-size: 700%;"></i>
+                    <span class="mt-3 fa-2x"> No History Products </span>
+                </p>
+            </div>
+            </div>
+            <%}%>
+
+                </div>
+        </section>
 
 
 
-    <!-- Details Delivery -->
-    <section>
-        <%if(products.length!=0){%>
-            <%for(var i = 0; i< products.length;i++){%>
+        <!-- Details Delivery -->
+        <section>
+            <%if(products.length!=0){%>
+                <%for(var i = 0; i< products.length;i++){%>
 
-                <section id="p<%=i%>">
-                    <div class="row">
-                        <div class=" col-lg-3 text-center">
-                            <div class="deliveryStsbrd">
-                                <div class="border border-danger innerBorder">
-                                    <h3>
-                                        <b>Delivery Date :</b>
+                    <section id="p<%=i%>">
+                        <div class="row">
+                            <div class=" col-lg-3 text-center">
+                                <div class="deliveryStsbrd">
+                                    <div class="border border-danger innerBorder">
+                                        <h3>
+                                            <b>Delivery Date :</b>
 
-                                        <%=products[i].deliveryDate.toLocaleDateString() %>
+                                            <%=products[i].deliveryDate.toLocaleDateString() %>
 
-                                    </h3>
-                                    <h3>
-                                        <b>Total Price: </b>
+                                        </h3>
+                                        <h3>
+                                            <b>Total Price: </b>
 
-                                        <%=products[i].totalPrice%>
+                                            <%=products[i].totalPrice%>
 
-                                    </h3>
+                                        </h3>
 
-                                    <h3>
-                                        <b>Paid Status: </b>
+                                        <h3>
+                                            <b>Paid Status: </b>
 
-                                        <u class="text-warning">
+                                            <u class="text-warning">
                                                 <%=products[i].paidStatus%>
                                             </u>
 
-                                    </h3>
-                                    <h3>
-                                        <b>Delivered Status: </b>
+                                        </h3>
+                                        <h3>
+                                            <b>Delivered Status: </b>
 
-                                        <u class="text-warning">
+                                            <u class="text-warning">
                                                 <%=products[i].deliveryStatus%>
                                             </u>
 
-                                    </h3>
-                                    <h3>
-                                        <b>Address:  </b>
+                                        </h3>
+                                        <h3>
+                                            <b>Address:  </b>
 
-                                        <%=products[i].address%>
-                                    </h3>
+                                            <%=products[i].address%>
+                                        </h3>
+                                    </div>
                                 </div>
                             </div>
+                            <% products[i].products.forEach(e => { %>
+                                <div class="col-lg-2 deliveryGrigGap">
+                                    <section class="deliveryGrigGap">
+                                        <div class="card" style="width: 18rem;">
+                                            <img class="card-img-top" src="<%=e.imageId%>" alt="Card image cap" width="100px" height="200px">
+                                            <div class="text-left text-info deliveryCard">
+                                                <h2 class="text-center tex">
+                                                    <%=e.productName%>
+                                                </h2>
+                                                <h2 class="text-dark"><b>Price: </b>Rs.
+                                                    <%=e.price%>
+                                                </h2>
+                                                <h2 class="text-dark"><b>Quantity: </b>
+                                                    <%=e.quantity%>
+                                                </h2>
+                                            </div>
+                                            <div class="card-body">
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-lg-1"></div>
+                                <% }) %>
+
                         </div>
-                        <% products[i].products.forEach(e => { %>
-                            <div class="col-lg-2 deliveryGrigGap">
-                                <section class="deliveryGrigGap">
-                                    <div class="card" style="width: 18rem;">
-                                        <img class="card-img-top" src="<%=e.imageId%>" alt="Card image cap" width="100px" height="200px">
-                                        <div class="text-left text-info deliveryCard">
-                                            <h2 class="text-center tex">
-                                                <%=e.productName%>
-                                            </h2>
-                                            <h2 class="text-dark"><b>Price: </b>Rs.
-                                                <%=e.price%>
-                                            </h2>
-                                            <h2 class="text-dark"><b>Quantity: </b>
-                                                <%=e.quantity%>
-                                            </h2>
-                                        </div>
-                                        <div class="card-body">
-                                        </div>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-lg-1"></div>
-                            <% }) %>
 
-                    </div>
-
-                </section>
-                <%}%>
+                    </section>
                     <%}%>
-    </section>
+                        <%}%>
+        </section>
 
 
 
 
-    <script>
-        function productDiplay(productName) {
-            var n = document.getElementById("totproduct").value
-            for (var i = 0; i < n; i++) {
-                if (i == productName) {
-                    $('#p' + i).removeClass('remove');
-                    $('#productHead' + i).addClass('selectedItem');
-                } else {
-                    $('#p' + i).addClass('remove');
-                    $('#productHead' + i).removeClass('selectedItem');
+        <script>
+            function productDiplay(productName) {
+                var n = document.getElementById("totproduct").value
+                for (var i = 0; i < n; i++) {
+                    if (i == productName) {
+                        $('#p' + i).removeClass('remove');
+                        $('#productHead' + i).addClass('selectedItem');
+                    } else {
+                        $('#p' + i).addClass('remove');
+                        $('#productHead' + i).removeClass('selectedItem');
+                    }
                 }
             }
-        }
-        productDiplay(0); //Removes remaning all except 0
-    </script>
+            productDiplay(0); //Removes remaning all except 0
+        </script>
 
 </body>
 

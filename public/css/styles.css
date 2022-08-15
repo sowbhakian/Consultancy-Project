@@ -453,6 +453,7 @@
 
 .deliveryStsbrd {
     /* padding: 0 30%; */
+    overflow: hidden;
 }
 
 .innerBorder {
@@ -576,4 +577,15 @@
     background-color: #0000006e;
     color: rgb(219, 164, 0);
     border-radius: 10rem;
+}
+
+.feedbackOuter {
+    padding: 5% 5%;
+    text-indent: 5%;
+    overflow: hidden;
+}
+
+.feedbackHead {
+    font-family: 'Source Serif Pro', serif;
+    font-style: italic;
 }
